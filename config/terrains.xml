@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<terrains>
+    <terrain>
+        <type>NOT FERTILE</type>
+	    <leaning>13.1</leaning>
+	    <width>140.1</width>
+	    <height>38.1</height>
+	    <price>12800.1</price>
+	    <edges>
+	        <edge>
+	            <x1>1.1</x1>
+	            <y1>2.5</y1>    
+	            <x2>2.0</x2>
+	            <y2>2.5</y2>
+	        </edge>
+	        <edge>
+	            <x1>1.1</x1>
+	            <y1>2.5</y1>
+	            <x2>1.1</x2>
+	            <y2>4.3</y2>
+	        </edge>
+	        <edge>
+	            <x1>1.1</x1>
+	            <y1>4.3</y1>
+	            <x2>2.0</x2>
+	            <y2>4.3</y2>
+	        </edge>
+	        <edge>
+	            <x1>2.0</x1>
+	            <y1>4.3</y1>
+	            <x2>2.0</x2>
+	            <y2>2.5</y2>
+	        </edge>
+	    </edges>
+    </terrain>
+    
+    <!-- Terrain 2 -->
+    <terrain>
+        <type>FERTILE</type>
+	    <leaning>18.1</leaning>
+	    <width>140.1</width>
+	    <height>38.1</height>
+	    <price>12800.1</price>
+	    <edges>
+	        <edge>
+	            <x1>1.1</x1>
+	            <y1>2.5</y1>    
+	            <x2>2.0</x2>
+	            <y2>2.5</y2>
+	        </edge>
+	        <edge>
+	            <x1>1.1</x1>
+	            <y1>2.5</y1>
+	            <x2>1.1</x2>
+	            <y2>4.3</y2>
+	        </edge>
+	        <edge>
+	            <x1>1.1</x1>
+	            <y1>4.3</y1>
+	            <x2>2.0</x2>
+	            <y2>4.3</y2>
+	        </edge>
+	        <edge>
+	            <x1>2.0</x1>
+	            <y1>4.3</y1>
+	            <x2>4.0</x2>
+	            <y2>5.5</y2>
+	        </edge>
+	    </edges>
+    </terrain>
+    
+</terrains>
