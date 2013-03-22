@@ -10,6 +10,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import org.w3c.dom.*; 
+
+import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
+
 
 import details.Edge;
 import details.Point;
@@ -169,63 +173,23 @@ public class Terrain {
 	
 	public static void main(String [ ] args) throws SAXException, IOException, ParserConfigurationException
 	{
-		/*
-		 * Reads data from the terrains.xml file and constructs each Terrain object
-		 * specified in there.
-		 */
-	
-		File file = new File("config/terrains.xml");
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		Document document = documentBuilder.parse(file);
-		int counterTerrains = 0;
+		XML xml = new XML();
+		//xml.readFile(edges);
 		
-		for(int a = 0; a < document.getElementsByTagName("terrain").getLength(); a++) {
-
-			String type = document.getElementsByTagName("type").item(a).getTextContent();
-			
-			String leaningx = document.getElementsByTagName("leaning").item(a).getTextContent();
-			double leaning = Double.parseDouble(leaningx);
-			
-			String widthx = document.getElementsByTagName("width").item(a).getTextContent();
-			double width = Double.parseDouble(widthx);
-			
-			String heightx = document.getElementsByTagName("height").item(a).getTextContent();
-			double height = Double.parseDouble(heightx);
-			
-			String pricex = document.getElementsByTagName("price").item(a).getTextContent();
-			double price = Double.parseDouble(pricex);
-			
-			for(int i = 0; i < 4; i++) {
-				
-				String x1x = document.getElementsByTagName("x1").item((counterTerrains*4)+i).getTextContent();
-				double x1 = Double.parseDouble(x1x);
-				
-				String y1x = document.getElementsByTagName("y1").item((counterTerrains*4)+i).getTextContent();
-				double y1 = Double.parseDouble(y1x);
-				
-				details.Point P1 = new Point(x1,y1);
-				
-				String x2x = document.getElementsByTagName("x2").item((counterTerrains*4)+i).getTextContent();
-				double x2 = Double.parseDouble(x2x);
-				
-				String y2x = document.getElementsByTagName("y2").item((counterTerrains*4)+i).getTextContent();
-				double y2 = Double.parseDouble(y2x);
-				
-				details.Point P2 = new Point(x2, y2);
-				
-				details.Edge edge = new details.Edge(P1,P2);
-				edges.add(edge);
-			}
-			
-			Terrain t = new Terrain(type, leaning, width, height, price, edges);
-			t.print();
-			edges.clear();
-			counterTerrains++;
-		}
+		//Example data for testing
+		List<Edge> edges1 = new ArrayList<Edge>();
+		Point p1 = new Point(1.0,1.1);
+		Point p2 = new Point(1.2,1.3);
+		Point p3 = new Point(1.4,1.5);
+		Point p4 = new Point(1.6,1.7);
+		Edge e1 = new Edge(p1,p2);
+		Edge e2 = new Edge(p2,p3);
+		Edge e3 = new Edge(p3, p4);
+		edges1.add(e1);
+		edges1.add(e2);
+		edges1.add(e3);
 		
-		System.out.println("Number of terrains: " + counterTerrains);
-		
+		xml.writeToXML("FERTILE", 5.5, 6.7, 8.8, 23569.5, edges1);
 	}
 	
 }
