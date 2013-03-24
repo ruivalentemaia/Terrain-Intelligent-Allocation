@@ -3,11 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 
 import org.xml.sax.SAXException;
 
 import details.Edge;
+import details.Point;
 
 public class Terrain {
 	private String type;
@@ -77,7 +79,7 @@ public class Terrain {
 		}
 		
 		if(edgesT.size() > 2) {
-			edges.equals(edgesT);
+			edges = edgesT;
 		}
 		else{
 			System.out.println(edgesT.size());
@@ -115,6 +117,10 @@ public class Terrain {
 		return edges;
 	}
 	
+	public int getEdgesSize() {
+		return edges.size();
+	}
+	
 	/* Sets */
 	
 	public void setType(String typeS) {
@@ -137,8 +143,8 @@ public class Terrain {
 		price = priceS;
 	}
 	
-	public void setEdges(List<Edge> edgesS[]) {
-		edges.equals(edgesS);
+	public void setEdges(List<Edge> edgesS) {
+		edges = edgesS;
 	}
 
 	/* Print Terrain Information */
@@ -162,13 +168,12 @@ public class Terrain {
 		}
 	}
 	
-	public static void main(String [ ] args) throws SAXException, IOException, ParserConfigurationException
+	public static void main(String [ ] args) throws SAXException, IOException, ParserConfigurationException, TransformerException
 	{
 		XML xml = new XML();
-		xml.readFile(edges);
 		
 		//Example data for testing
-		/*List<Edge> edges1 = new ArrayList<Edge>();
+		List<Edge> edges1 = new ArrayList<Edge>();
 		Point p1 = new Point(1.0,1.1);
 		Point p2 = new Point(1.2,1.3);
 		Point p3 = new Point(1.4,1.5);
@@ -176,9 +181,15 @@ public class Terrain {
 		Edge e1 = new Edge(p1,p2);
 		Edge e2 = new Edge(p2,p3);
 		Edge e3 = new Edge(p3, p4);
+		Edge e4 = new Edge(p1,p4);
 		edges1.add(e1);
 		edges1.add(e2);
-		edges1.add(e3);*/
+		edges1.add(e3);
+		edges1.add(e4);
+		
+		Terrain t = new Terrain("NOT FERTILE", 1.1, 2.2, 3.3, 4.4, edges1);
+		xml.addTerrainToFile(t);
+		xml.readFile(t.getEdges());
 	}
 	
 }
