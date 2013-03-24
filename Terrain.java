@@ -1,22 +1,13 @@
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Document;
+
 import org.xml.sax.SAXException;
 
-import org.w3c.dom.*; 
-
-import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
-
-
 import details.Edge;
-import details.Point;
 
 public class Terrain {
 	private String type;
@@ -159,10 +150,10 @@ public class Terrain {
 			System.out.println("Area: " + this.getWidth() * this.getHeight());
 			System.out.println("Price: " + this.getPrice());
 			System.out.println("Price per sq. meter: " + this.getPrice()/(this.getWidth() + this.getHeight()));
-			for(int i = 0; i < this.edges.size(); i++) {
+			for(int i = 0; i < edges.size(); i++) {
 				System.out.println("Edge " + i);
-				System.out.println("P1: " + this.edges.get(i).getP1().getX1() + "," + this.edges.get(i).getP1().getY1());
-				System.out.println("P2: " + this.edges.get(i).getP2().getX1() + "," + this.edges.get(i).getP2().getY1());
+				System.out.println("P1: " + edges.get(i).getP1().getX1() + "," + edges.get(i).getP1().getY1());
+				System.out.println("P2: " + edges.get(i).getP2().getX1() + "," + edges.get(i).getP2().getY1());
 			}
 			System.out.print("\n");
 		}
@@ -174,10 +165,10 @@ public class Terrain {
 	public static void main(String [ ] args) throws SAXException, IOException, ParserConfigurationException
 	{
 		XML xml = new XML();
-		//xml.readFile(edges);
+		xml.readFile(edges);
 		
 		//Example data for testing
-		List<Edge> edges1 = new ArrayList<Edge>();
+		/*List<Edge> edges1 = new ArrayList<Edge>();
 		Point p1 = new Point(1.0,1.1);
 		Point p2 = new Point(1.2,1.3);
 		Point p3 = new Point(1.4,1.5);
@@ -187,9 +178,7 @@ public class Terrain {
 		Edge e3 = new Edge(p3, p4);
 		edges1.add(e1);
 		edges1.add(e2);
-		edges1.add(e3);
-		
-		xml.writeToXML("FERTILE", 5.5, 6.7, 8.8, 23569.5, edges1);
+		edges1.add(e3);*/
 	}
 	
 }
