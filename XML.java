@@ -39,8 +39,12 @@ public class XML {
 		file = file1;
 	}
 	
+	/*
+	 * Reads the terrains from the terrains.xml configuration file and
+	 * writes its' information and the number of terrains that exist
+	 * in the file.
+	 */
 	public void readFile(List<details.Edge> edges) throws ParserConfigurationException, SAXException, IOException {
-		      
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(file);
@@ -92,111 +96,158 @@ public class XML {
 		System.out.println("Number of terrains: " + counterTerrains);
 	}
 	
+	/*
+	 * Adds a terrain to the terrains.xml configuration file
+	 */
 	public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAXException, IOException, TransformerException {
-		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance(); 
-		domFactory.setIgnoringComments(true);
-		DocumentBuilder builder = domFactory.newDocumentBuilder(); 
-		Document doc = builder.parse(file);
 		
-		NodeList nodes = doc.getElementsByTagName("terrain");
-		
-		//estrutura do elemento "terrain" criado
-		
-		Element terrain = doc.createElement("terrain");
-		
-		Text ty = doc.createTextNode(t.getType()); 
-		Element p = doc.createElement("type"); 
-		p.appendChild(ty);
-		
-		Text l = doc.createTextNode(Double.toString(t.getLeaning()));
-		Element leaning = doc.createElement("leaning");
-		leaning.appendChild(l);
-		
-		Text w = doc.createTextNode(Double.toString(t.getWidth()));
-		Element width = doc.createElement("width");
-		width.appendChild(w);
-		
-		Text h = doc.createTextNode(Double.toString(t.getHeight()));
-		Element height = doc.createElement("height");
-		height.appendChild(h);
-		
-		Text pri = doc.createTextNode(Double.toString(t.getPrice()));
-		Element price = doc.createElement("price");
-		price.appendChild(pri);
+		if(t.validationNumber == 1) {
+			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance(); 
+			domFactory.setIgnoringComments(true);
+			DocumentBuilder builder = domFactory.newDocumentBuilder(); 
+			Document doc = builder.parse(file);
+			
+			NodeList nodes = doc.getElementsByTagName("terrain");
+			
+			/*
+			 * Structure of the "terrain" element
+			 * <terrain>
+			 * 	<type>t.getType()</type>
+			 * 	<leaning>t.getLeaning()</leaning>
+			 * 	<width>t.getWidth()</width>
+			 * 	<height>t.getHeight()</height>
+			 *	<price>t.getPrice()</price>
+			 *	<edges>
+			 *		<edge>
+			 *			<x1>t.getEdges().get(i).getP1().getX1()</x1>
+			 *			<y1>t.getEdges().get(i).getP1().getY1()</y1>
+			 *			<x2>t.getEdges().get(i).getP2().getX1()</x2>
+			 *			<y2>t.getEdges().get(i).getP2().getY1()</y2>
+			 *		</edge>
+			 *		<edge>
+			 *			<x1>t.getEdges().get(i+1).getP1().getX1()</x1>
+			 *			<y1>t.getEdges().get(i+1).getP1().getY1()</y1>
+			 *			<x2>t.getEdges().get(i+1).getP2().getX1()</x2>
+			 *			<y2>t.getEdges().get(i+1).getP2().getY1()</y2>
+			 *		</edge>
+			 *		<edge>
+			 *			<x1>t.getEdges().get(i+2).getP1().getX1()</x1>
+			 *			<y1>t.getEdges().get(i+2).getP1().getY1()</y1>
+			 *			<x2>t.getEdges().get(i+2).getP2().getX1()</x2>
+			 *			<y2>t.getEdges().get(i+2).getP2().getY1()</y2>
+			 *		</edge>
+			 *		<edge>
+			 *			<x1>t.getEdges().get(i+3).getP1().getX1()</x1>
+			 *			<y1>t.getEdges().get(i+3).getP1().getY1()</y1>
+			 *			<x2>t.getEdges().get(i+3).getP2().getX1()</x2>
+			 *			<y2>t.getEdges().get(i+3).getP2().getY1()</y2>
+			 *		</edge>
+			 *	</edges>
+			 * </terrain>
+			 */
+			
+			Element terrain = doc.createElement("terrain");
+			
+			Text ty = doc.createTextNode(t.getType()); 
+			Element p = doc.createElement("type"); 
+			p.appendChild(ty);
+			
+			Text l = doc.createTextNode(Double.toString(t.getLeaning()));
+			Element leaning = doc.createElement("leaning");
+			leaning.appendChild(l);
+			
+			Text w = doc.createTextNode(Double.toString(t.getWidth()));
+			Element width = doc.createElement("width");
+			width.appendChild(w);
+			
+			Text h = doc.createTextNode(Double.toString(t.getHeight()));
+			Element height = doc.createElement("height");
+			height.appendChild(h);
+			
+			Text pri = doc.createTextNode(Double.toString(t.getPrice()));
+			Element price = doc.createElement("price");
+			price.appendChild(pri);
 
-		terrain.appendChild(p);
-		terrain.appendChild(leaning);
-		terrain.appendChild(width);
-		terrain.appendChild(height);
-		terrain.appendChild(price);
-		
-		Element edges = doc.createElement("edges");
-		
-		int edgesSize = t.getEdgesSize();
-		
-		for(int i = 0; i < edgesSize; i++) {
-			Element edge = doc.createElement("edge");
+			terrain.appendChild(p);
+			terrain.appendChild(leaning);
+			terrain.appendChild(width);
+			terrain.appendChild(height);
+			terrain.appendChild(price);
 			
-			Text x1t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP1().getX1()));
-			Element x1 = doc.createElement("x1");
-			x1.appendChild(x1t);
+			Element edges = doc.createElement("edges");
 			
-			Text y1t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP1().getY1()));
-			Element y1 = doc.createElement("y1");
-			y1.appendChild(y1t);
+			int edgesSize = t.getEdgesSize();
 			
-			Text x2t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP2().getX1()));
-			Element x2 = doc.createElement("x2");
-			x2.appendChild(x2t);
+			for(int i = 0; i < edgesSize; i++) {
+				Element edge = doc.createElement("edge");
+				
+				Text x1t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP1().getX1()));
+				Element x1 = doc.createElement("x1");
+				x1.appendChild(x1t);
+				
+				Text y1t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP1().getY1()));
+				Element y1 = doc.createElement("y1");
+				y1.appendChild(y1t);
+				
+				Text x2t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP2().getX1()));
+				Element x2 = doc.createElement("x2");
+				x2.appendChild(x2t);
+				
+				Text y2t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP2().getY1()));
+				Element y2 = doc.createElement("y2");
+				y2.appendChild(y2t);
+				
+				edge.appendChild(x1);
+				edge.appendChild(y1);
+				edge.appendChild(x2);
+				edge.appendChild(y2);
+				
+				edges.appendChild(edge);
+			}
+				
+			terrain.appendChild(edges);
 			
-			Text y2t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP2().getY1()));
-			Element y2 = doc.createElement("y2");
-			y2.appendChild(y2t);
+			nodes.item(0).getParentNode().insertBefore(terrain, nodes.item(0));
 			
-			edge.appendChild(x1);
-			edge.appendChild(y1);
-			edge.appendChild(x2);
-			edge.appendChild(y2);
+			TransformerFactory tf = TransformerFactory.newInstance();
+			tf.setAttribute("indent-number", new Integer(2));
+			Transformer transformer = tf.newTransformer();
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+			StreamResult result = new StreamResult(new StringWriter());
+			DOMSource source = new DOMSource(doc);
+			transformer.transform(source, result);
+
+			String xmlOutput = result.getWriter().toString();
 			
-			edges.appendChild(edge);
+			//Writing to the file
+			FileOutputStream fop = null;
+	        try {
+	        	fop = new FileOutputStream(file);
+	            if (!file.exists()) {
+	            	file.createNewFile();
+	            }
+	            byte[] contentInBytes = xmlOutput.getBytes();
+	            fop.write(contentInBytes);
+	            fop.flush();
+	            fop.close();
+
+	        } catch (IOException e) {
+	        	e.printStackTrace();
+	        } finally {
+	        	try {
+	        		if (fop != null) {
+	        			fop.close();
+	                }
+	            } catch (IOException e) {
+	            	e.printStackTrace();
+	            }
+	        }
 		}
-			
-		terrain.appendChild(edges);
+		else {
+			System.out.println("Error: it's not possible to write to the terrains.xml file because of the error specified above.");
+		}
 		
-		nodes.item(0).getParentNode().insertBefore(terrain, nodes.item(0));
-		
-		Transformer transformer = TransformerFactory.newInstance().newTransformer();
-		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
-		StreamResult result = new StreamResult(new StringWriter());
-		DOMSource source = new DOMSource(doc);
-		transformer.transform(source, result);
-
-		String xmlOutput = result.getWriter().toString();
-		//System.out.println(xmlOutput);
-		
-		//Writing to the file
-		FileOutputStream fop = null;
-        try {
-        	fop = new FileOutputStream(file);
-            if (!file.exists()) {
-            	file.createNewFile();
-            }
-            byte[] contentInBytes = xmlOutput.getBytes();
-            fop.write(contentInBytes);
-            fop.flush();
-            fop.close();
-
-        } catch (IOException e) {
-        	e.printStackTrace();
-        } finally {
-        	try {
-        		if (fop != null) {
-        			fop.close();
-                }
-            } catch (IOException e) {
-            	e.printStackTrace();
-            }
-        }
 	}
 }

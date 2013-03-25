@@ -35,13 +35,13 @@ public class Terrain {
 				type = typeT;
 			}
 			else {
-				System.out.println(typeT);
-				System.out.println("Type not well specified. Try \"FERTILE\" or \"NOT FERTILE\".");
+				System.out.println("Type inserted: " + typeT);
+				System.out.println("Error: Type not well specified. Try \"FERTILE\" or \"NOT FERTILE\".");
 				return;
 			}
 		}
 		else {
-			System.out.println("Type not well specified. Try \"FERTILE\" or \"NOT FERTILE\".");
+			System.out.println("Error: Type not well specified. Try \"FERTILE\" or \"NOT FERTILE\".");
 			return;
 		}
 		
@@ -49,8 +49,8 @@ public class Terrain {
 			leaning = leaningT;
 		}
 		else {
-			System.out.println(leaningT);
-			System.out.println("Leaning has to be 0 or higher.");
+			System.out.println("Leaning inserted: " + leaningT);
+			System.out.println("Error: Leaning has to be 0 or higher.");
 			return;
 		}
 		
@@ -58,7 +58,7 @@ public class Terrain {
 			width = widthT;
 		}
 		else {
-			System.out.println("Width has to be higher than 0.");
+			System.out.println("Error: Width has to be higher than 0.");
 			return;
 		}
 		
@@ -66,7 +66,7 @@ public class Terrain {
 			height = heightT;
 		}
 		else{
-			System.out.println("Height has to be higher than 0.");
+			System.out.println("Error: Height has to be higher than 0.");
 			return;
 		}
 		
@@ -74,7 +74,7 @@ public class Terrain {
 			price = priceT;
 		}
 		else{
-			System.out.println("Price has to higher than 0.");
+			System.out.println("Error: Price has to higher than 0.");
 			return;
 		}
 		
@@ -82,8 +82,8 @@ public class Terrain {
 			edges = edgesT;
 		}
 		else{
-			System.out.println(edgesT.size());
-			System.out.println("The number of edges of the terrain has to be at least 3.");
+			System.out.println("Size of the edges list: " + edgesT.size());
+			System.out.println("Error: The number of edges of the terrain has to be at least 3.");
 			return;
 		}
 		
@@ -191,5 +191,4 @@ public class Terrain {
 		xml.addTerrainToFile(t);
 		xml.readFile(t.getEdges());
 	}
-	
 }
