@@ -125,6 +125,10 @@ public class Terrain {
 		return edges.size();
 	}
 	
+	public boolean getPenalty() {
+		return penalty;
+	}
+	
 	/* Sets */
 	
 	public void setType(String typeS) {
@@ -149,6 +153,10 @@ public class Terrain {
 	
 	public void setEdges(List<Edge> edgesS) {
 		edges = edgesS;
+	}
+	
+	public void setPenalty(boolean pen) {
+		penalty = pen;
 	}
 
 	/* Print Terrain Information */
