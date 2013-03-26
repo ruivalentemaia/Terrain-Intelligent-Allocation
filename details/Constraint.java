@@ -5,7 +5,7 @@ public class Constraint {
 	String connector;
 	Rule rule;
 	
-	public Constraint(String terraintype1, String connector1) {	
+	public Constraint(String terraintype1, String connector1, Rule r) {	
 		/*
 		 * Validation for the terrain types available
 		 * (SCHOOL, HOSPITAL, HOUSE, AIRPORT, STADIUM)
@@ -50,5 +50,44 @@ public class Constraint {
 			return;
 		}
 		
+		/*
+		 * Validations for the rule structure.
+
+		// - if the field is "type" the measurement has to be "EXACTLY"
+		if( (r.getField() == "type") && (r.getMeasurement() != "EXACTLY") ) {
+			System.out.println("Field: " + r.getField());
+			System.out.println("Measurement: " + r.getMeasurement());
+			System.out.println("Error: Invalid rule. \"Type\" field can only be measured with \"EXACTLY\".");
+			return;
+		}
+		else {
+			r = new Rule("", "EXACTLY", 0, "type");
+		}*/
+	}
+	
+	/* Gets */
+	public String getTerrainType() {
+		return terrainType;
+	}
+	
+	public String getConnector() {
+		return connector;
+	}
+	
+	public Rule getRule() {
+		return rule;
+	}
+	
+	/* Sets */
+	public void setTerrainType(String tT) {
+		terrainType = tT;
+	}
+	
+	public void setConnector(String c) {
+		connector = c;
+	}
+	
+	public void setRule(Rule r) {
+		rule = r;
 	}
 }
