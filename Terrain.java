@@ -191,27 +191,19 @@ public class Terrain {
 			if(r.getMeasurement() == "MORE THAN") {
 
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() > r.getNumber()) {
-						return true;
-					}
+					if(this.getLeaning() > r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() > r.getNumber()) {
-						return true;
-					}
+					if(this.getWidth() > r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() > r.getNumber()) {
-						return true;
-					}
+					if(this.getHeight() > r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() > r.getNumber()) {
-						return true;
-					}
+					if(this.getPrice() > r.getNumber()) return true;
 					else return false;
 				}
 				else {
@@ -227,27 +219,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "MORE OR THE SAME AS") {
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() >= r.getNumber()) {
-						return true;
-					}
+					if(this.getLeaning() >= r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() >= r.getNumber()) {
-						return true;
-					}
+					if(this.getWidth() >= r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() >= r.getNumber()) {
-						return true;
-					}
+					if(this.getHeight() >= r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() >= r.getNumber()) {
-						return true;
-					}
+					if(this.getPrice() >= r.getNumber()) return true;
 					else return false;
 				}
 				else {
@@ -263,27 +247,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "LESS THAN") {
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() < r.getNumber()) {
-						return true;
-					}
+					if(this.getLeaning() < r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() < r.getNumber()) {
-						return true;
-					}
+					if(this.getWidth() < r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() < r.getNumber()) {
-						return true;
-					}
+					if(this.getHeight() < r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() < r.getNumber()) {
-						return true;
-					}
+					if(this.getPrice() < r.getNumber()) return true;
 					else return false;
 				}
 				else {
@@ -299,27 +275,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "LESS OR THE SAME AS") {
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() <= r.getNumber()) {
-						return true;
-					}
+					if(this.getLeaning() <= r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() <= r.getNumber()) {
-						return true;
-					}
+					if(this.getWidth() <= r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() <= r.getNumber()) {
-						return true;
-					}
+					if(this.getHeight() <= r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() <= r.getNumber()) {
-						return true;
-					}
+					if(this.getPrice() <= r.getNumber()) return true;
 					else return false;
 				}
 				else {
@@ -335,27 +303,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "EXACTLY") {
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() == r.getNumber()) {
-						return true;
-					}
+					if(this.getLeaning() == r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() == r.getNumber()) {
-						return true;
-					}
+					if(this.getWidth() == r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() == r.getNumber()) {
-						return true;
-					}
+					if(this.getHeight() == r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() == r.getNumber()) {
-						return true;
-					}
+					if(this.getPrice() == r.getNumber()) return true;
 					else return false;
 				}
 				else if(r.getField() == "type") {
@@ -392,27 +352,19 @@ public class Terrain {
 			if(r.getMeasurement() == "MORE THAN") {
 
 				if(r.getField() == "leaning") {
-					if(!(this.getLeaning() > r.getNumber())) {
-						return true;
-					}
+					if(!(this.getLeaning() > r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(!(this.getWidth() > r.getNumber())) {
-						return true;
-					}
+					if(!(this.getWidth() > r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(!(this.getHeight() > r.getNumber())) {
-						return true;
-					}
+					if(!(this.getHeight() > r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(!(this.getPrice() > r.getNumber())) {
-						return true;
-					}
+					if(!(this.getPrice() > r.getNumber())) return true;
 					else return false;
 				}
 				else {
@@ -428,27 +380,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "MORE OR THE SAME AS") {
 				if(r.getField() == "leaning") {
-					if(!(this.getLeaning() >= r.getNumber())) {
-						return true;
-					}
+					if(!(this.getLeaning() >= r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(!(this.getWidth() >= r.getNumber())) {
-						return true;
-					}
+					if(!(this.getWidth() >= r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(!(this.getHeight() >= r.getNumber())) {
-						return true;
-					}
+					if(!(this.getHeight() >= r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(!(this.getPrice() >= r.getNumber())) {
-						return true;
-					}
+					if(!(this.getPrice() >= r.getNumber())) return true;
 					else return false;
 				}
 				else {
@@ -464,27 +408,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "LESS THAN") {
 				if(r.getField() == "leaning") {
-					if(!(this.getLeaning() < r.getNumber())) {
-						return true;
-					}
+					if(!(this.getLeaning() < r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(!(this.getWidth() < r.getNumber())) {
-						return true;
-					}
+					if(!(this.getWidth() < r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(!(this.getHeight() < r.getNumber())) {
-						return true;
-					}
+					if(!(this.getHeight() < r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(!(this.getPrice() < r.getNumber())) {
-						return true;
-					}
+					if(!(this.getPrice() < r.getNumber())) return true;
 					else return false;
 				}
 				else {
@@ -500,27 +436,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "LESS OR THE SAME AS") {
 				if(r.getField() == "leaning") {
-					if(!(this.getLeaning() <= r.getNumber())) {
-						return true;
-					}
+					if(!(this.getLeaning() <= r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(!(this.getWidth() <= r.getNumber())) {
-						return true;
-					}
+					if(!(this.getWidth() <= r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(!(this.getHeight() <= r.getNumber())) {
-						return true;
-					}
+					if(!(this.getHeight() <= r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(!(this.getPrice() <= r.getNumber())) {
-						return true;
-					}
+					if(!(this.getPrice() <= r.getNumber())) return true;
 					else return false;
 				}
 				else {
@@ -536,27 +464,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "EXACTLY") {
 				if(r.getField() == "leaning") {
-					if(!(this.getLeaning() == r.getNumber())) {
-						return true;
-					}
+					if(!(this.getLeaning() == r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "width") {
-					if(!(this.getWidth() == r.getNumber())) {
-						return true;
-					}
+					if(!(this.getWidth() == r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "height") {
-					if(!(this.getHeight() == r.getNumber())) {
-						return true;
-					}
+					if(!(this.getHeight() == r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "price") {
-					if(!(this.getPrice() == r.getNumber())) {
-						return true;
-					}
+					if(!(this.getPrice() == r.getNumber())) return true;
 					else return false;
 				}
 				else if(r.getField() == "type") {
@@ -592,27 +512,19 @@ public class Terrain {
 			if(r.getMeasurement() == "MORE THAN") {
 
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() > r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getLeaning() > r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() > r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getWidth() > r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() > r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getHeight() > r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() > r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getPrice() > r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else {
@@ -628,27 +540,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "MORE OR THE SAME AS") {
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() >= r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getLeaning() >= r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() >= r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getWidth() >= r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() >= r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getHeight() >= r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() >= r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getPrice() >= r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else {
@@ -664,27 +568,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "LESS THAN") {
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() < r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getLeaning() < r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() < r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getWidth() < r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() < r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getHeight() < r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() < r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getPrice() < r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else {
@@ -700,27 +596,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "LESS OR THE SAME AS") {
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() <= r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getLeaning() <= r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() <= r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getWidth() <= r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() <= r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getHeight() <= r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() <= r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getPrice() <= r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else {
@@ -736,27 +624,19 @@ public class Terrain {
 			 */
 			else if(r.getMeasurement() == "EXACTLY") {
 				if(r.getField() == "leaning") {
-					if(this.getLeaning() == r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getLeaning() == r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "width") {
-					if(this.getWidth() == r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getWidth() == r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "height") {
-					if(this.getHeight() == r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getHeight() == r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "price") {
-					if(this.getPrice() == r.getNumber()) {
-						this.penalty = false;
-					}
+					if(this.getPrice() == r.getNumber()) this.penalty = false;
 					else this.penalty = true;
 				}
 				else if(r.getField() == "type") {
