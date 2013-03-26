@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 import details.Constraint;
 import details.Edge;
 import details.Point;
+import details.Rule;
 
 public class Terrain {
 	private String type;
@@ -20,12 +21,14 @@ public class Terrain {
 	private double price;
 	//arraylist of edges
 	private static List<Edge> edges = new ArrayList<Edge>();
+	private boolean penalty;
 	
 	//number that says if a terrain is valid or not
 	public int validationNumber;
 	
 	public Terrain(String typeT, double leaningT, double widthT, double heightT, double priceT, List<Edge> edgesT) {
 		
+		penalty = false;
 		validationNumber = 0;
 		
 		if( (typeT != "") || (typeT != null)) {
@@ -169,7 +172,609 @@ public class Terrain {
 		}
 	}
 	
-	public void applyConstraint(Constraint c) {
+	public boolean applyUserSelectedConstraint(Constraint c) {
+		Rule r;
+		if(c.getConnector() == "MUST HAVE") {
+			r = c.getRule();
+			/*
+			 * Rule for the "MORE THAN" (operator >) and comparison between each field of the terrain
+			 * and the number specified in the rule.
+			 */
+			if(r.getMeasurement() == "MORE THAN") {
+
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() > r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() > r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() > r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() > r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator >=
+			 */
+			else if(r.getMeasurement() == "MORE OR THE SAME AS") {
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() >= r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() >= r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() >= r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() >= r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator <
+			 */
+			else if(r.getMeasurement() == "LESS THAN") {
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() < r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() < r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() < r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() < r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator <=
+			 */
+			else if(r.getMeasurement() == "LESS OR THE SAME AS") {
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() <= r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() <= r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() <= r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() <= r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator ==
+			 */
+			else if(r.getMeasurement() == "EXACTLY") {
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() == r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() == r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() == r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() == r.getNumber()) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "type") {
+					if(this.getType() == "FERTILE") {
+						r.setNumber(1);
+						return true;
+					}
+					else if(this.getType() == "NOT FERTILE") {
+						r.setNumber(0);
+						return true;
+					}
+					else {
+						System.out.println("Type: " + this.getType());
+						System.out.println("Error: Invalid type.");
+						return false;
+					}
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+		}
 		
+		else if(c.getConnector() == "MUST NOT HAVE") {
+			r = c.getRule();
+			/*
+			 * Rule for the "MORE THAN" (operator >) and negative comparison between each field of the terrain
+			 * and the number specified in the rule.
+			 */
+			if(r.getMeasurement() == "MORE THAN") {
+
+				if(r.getField() == "leaning") {
+					if(!(this.getLeaning() > r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(!(this.getWidth() > r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(!(this.getHeight() > r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(!(this.getPrice() > r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator >=
+			 */
+			else if(r.getMeasurement() == "MORE OR THE SAME AS") {
+				if(r.getField() == "leaning") {
+					if(!(this.getLeaning() >= r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(!(this.getWidth() >= r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(!(this.getHeight() >= r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(!(this.getPrice() >= r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator <
+			 */
+			else if(r.getMeasurement() == "LESS THAN") {
+				if(r.getField() == "leaning") {
+					if(!(this.getLeaning() < r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(!(this.getWidth() < r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(!(this.getHeight() < r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(!(this.getPrice() < r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator <=
+			 */
+			else if(r.getMeasurement() == "LESS OR THE SAME AS") {
+				if(r.getField() == "leaning") {
+					if(!(this.getLeaning() <= r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(!(this.getWidth() <= r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(!(this.getHeight() <= r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(!(this.getPrice() <= r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator ==
+			 */
+			else if(r.getMeasurement() == "EXACTLY") {
+				if(r.getField() == "leaning") {
+					if(!(this.getLeaning() == r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "width") {
+					if(!(this.getWidth() == r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "height") {
+					if(!(this.getHeight() == r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "price") {
+					if(!(this.getPrice() == r.getNumber())) {
+						return true;
+					}
+					else return false;
+				}
+				else if(r.getField() == "type") {
+					if(!(this.getType() == "FERTILE")) {
+						r.setNumber(0);
+						return true;
+					}
+					else if(!(this.getType() == "NOT FERTILE")) {
+						r.setNumber(1);
+						return true;
+					}
+					else {
+						System.out.println("Type: " + this.getType());
+						System.out.println("Error: Invalid type.");
+						return false;
+					}
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+		}
+		
+		else if(c.getConnector() == "CAN HAVE") {
+			r = c.getRule();
+			/*
+			 * Rule for the "MORE THAN" (operator >) and comparison between each field of the terrain
+			 * and the number specified in the rule.
+			 */
+			if(r.getMeasurement() == "MORE THAN") {
+
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() > r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() > r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() > r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() > r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					this.penalty = true;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator >=
+			 */
+			else if(r.getMeasurement() == "MORE OR THE SAME AS") {
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() >= r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() >= r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() >= r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() >= r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					this.penalty = true;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator <
+			 */
+			else if(r.getMeasurement() == "LESS THAN") {
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() < r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() < r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() < r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() < r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					this.penalty = true;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator <=
+			 */
+			else if(r.getMeasurement() == "LESS OR THE SAME AS") {
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() <= r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() <= r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() <= r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() <= r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					this.penalty = true;
+				}
+			}
+
+			/*
+			 * Same thing as previous comparison, but now with the operator ==
+			 */
+			else if(r.getMeasurement() == "EXACTLY") {
+				if(r.getField() == "leaning") {
+					if(this.getLeaning() == r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "width") {
+					if(this.getWidth() == r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "height") {
+					if(this.getHeight() == r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "price") {
+					if(this.getPrice() == r.getNumber()) {
+						this.penalty = false;
+					}
+					else this.penalty = true;
+				}
+				else if(r.getField() == "type") {
+					if(this.getType() == "FERTILE") {
+						r.setNumber(1);
+						this.penalty = false;
+					}
+					else if(this.getType() == "NOT FERTILE") {
+						r.setNumber(0);
+						this.penalty = false;
+					}
+					else {
+						System.out.println("Type: " + this.getType());
+						System.out.println("Error: Invalid type.");
+						this.penalty = true;
+					}
+				}
+
+				else {
+					System.out.println("Measurement: " + r.getMeasurement());
+					System.out.println("Field: " + r.getField());
+					System.out.println("Error: Invalid comparison.");
+					return false;
+				}
+			}
+		}
+		return false;
 	}
 }

@@ -24,7 +24,6 @@ public class Rule {
 		 */
 		if(m == "MORE THAN") {
 			measurement = m;
-			
 		}
 		else if( m == "MORE OR THE SAME AS") {
 			measurement = m;
