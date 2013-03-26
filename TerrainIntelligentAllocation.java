@@ -33,9 +33,13 @@ public class TerrainIntelligentAllocation {
 		edges1.add(e3);
 		edges1.add(e4);
 		
-		Rule r = new Rule("LAKE", "", 0, "");
+		Rule r = new Rule("", "MORE THAN", 1.0, "leaning");
 		Constraint c = new Constraint("SCHOOL", "MUST HAVE", r);
 		Terrain t = new Terrain("NOT FERTILE", 1.1, 2.2, 3.3, 4.4, edges1);
-		xml.readFile(t.getEdges());
+		if(t.applyUserSelectedConstraint(c)) {
+			System.out.println("Yes!");
+			xml.readFile(t.getEdges());
+		}
+		else System.out.println("No!");
 	}
 }

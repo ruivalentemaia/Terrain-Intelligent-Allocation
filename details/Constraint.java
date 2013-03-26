@@ -50,6 +50,8 @@ public class Constraint {
 			return;
 		}
 		
+		rule = r;
+		
 		/*
 		 * Validations for the rule structure.
 
