@@ -20,15 +20,17 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
+import details.Constraint;
 import details.Point;
+import details.Rule;
 
 
 public class XML {
 	
 	private File file;
 	
-	public XML() {
-		file = new File("src/config/terrains.xml");
+	public XML(File f) {
+		file = f;
 	}
 	
 	public File getFile() {
@@ -249,5 +251,40 @@ public class XML {
 			System.out.println("Error: it's not possible to write to the terrains.xml file because of the error specified above.");
 		}
 		
+	}
+	
+	/*
+	 * Reads data from config.xml and creates the Map object
+	 */
+	public Map readConfigurationFile() throws ParserConfigurationException, SAXException, IOException {
+		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+		Document document = documentBuilder.parse(file);
+		
+		String numberTerrains = document.getElementsByTagName("numberTerrains").item(0).getTextContent();
+		int nT = Integer.parseInt(numberTerrains);
+		String maxArea = document.getElementsByTagName("maxArea").item(0).getTextContent();
+		double mA = Double.parseDouble(maxArea);
+		
+		//add to map attributes...
+		Map m = new Map(nT, mA);
+	
+		for(int i = 0; i < document.getElementsByTagName("building").getLength();i++) {
+			String bName = document.getElementsByTagName("name").item(i).getTextContent();
+			for(int a = 0; a < document.getElementsByTagName("restriction").getLength(); a++){
+				String rType = document.getElementsByTagName("type").item(a).getTextContent();
+				String nTerrain = document.getElementsByTagName("nearTerrain").item(a).getTextContent();
+				String measurement = document.getElementsByTagName("measurement").item(a).getTextContent();
+				String val = document.getElementsByTagName("value").item(a).getTextContent();
+				double v = Double.parseDouble(val);
+				String field = document.getElementsByTagName("field").item(a).getTextContent();
+				
+				Rule r = new Rule(nTerrain, measurement, v, field);
+				Constraint c = new Constraint(bName, rType, r);
+				//add to map list of constraints...
+				m.addConstraint(c);
+			}
+		}
+		return m;
 	}
 }

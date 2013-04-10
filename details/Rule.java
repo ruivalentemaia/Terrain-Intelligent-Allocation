@@ -22,19 +22,19 @@ public class Rule {
 		 * or
 		 * "MORE OR THE SAME AS 5.5 leaning", i.e.
 		 */
-		if(m == "MORE THAN") {
+		if(m.equals("MORE THAN")) {
 			measurement = m;
 		}
-		else if( m == "MORE OR THE SAME AS") {
+		else if(m.equals("MORE OR THE SAME AS")) {
 			measurement = m;
 		}
-		else if(m == "LESS THAN") {
+		else if(m.equals("LESS THAN")) {
 			measurement = m;
 		}
-		else if(m == "LESS OR THE SAME AS") {
+		else if(m.equals("LESS OR THE SAME AS")) {
 			measurement = m;
 		}
-		else if(m == "EXACTLY") {
+		else if(m.equals("EXACTLY")) {
 			measurement = m;
 		}
 		else {
@@ -59,19 +59,19 @@ public class Rule {
 		 * 		 "MORE THAN 400.5 price" or
 		 * 		 "EXACTLY "NOT FERTILE" type.
 		 */
-		if(f == "type") {
+		if(f.equals("type")) {
 			field = f;
 		}
-		else if(f == "leaning") {
+		else if(f.equals("leaning")) {
 			field = f;
 		}
-		else if(f == "width") {
+		else if(f.equals("width")) {
 			field = f;
 		}
-		else if(f == "height") {
+		else if(f.equals("height")) {
 			field = f;
 		}
-		else if(f == "price") {
+		else if(f.equals("price")) {
 			field = f;
 		}
 		else {

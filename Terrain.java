@@ -1,16 +1,8 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
-
-import org.xml.sax.SAXException;
-
 import details.Constraint;
 import details.Edge;
-import details.Point;
 import details.Rule;
 
 public class Terrain {

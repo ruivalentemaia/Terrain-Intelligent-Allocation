@@ -6,42 +6,26 @@ public class Constraint {
 	Rule rule;
 	
 	public Constraint(String terraintype1, String connector1, Rule r) {	
-		/*
-		 * Validation for the terrain types available
-		 * (SCHOOL, HOSPITAL, HOUSE, AIRPORT, STADIUM)
-		 */
-		if(terraintype1 == "SCHOOL") {
-			terrainType = terraintype1;
-		}
-		else if(terraintype1 == "HOSPITAL") {
-			terrainType = terraintype1;
-		}
-		else if(terraintype1 == "HOUSE") {
-			terrainType = terraintype1;
-		}
-		else if(terraintype1 == "AIRPORT") {
-			terrainType = terraintype1;
-		}
-		else if(terraintype1 == "STADIUM"){
-			terrainType = terraintype1;
-		}
-		else {
+	
+		if(terraintype1.equals("")) {
 			System.out.println("Terrain type typed: " + terraintype1);
-			System.out.println("Error: Terrain type not valid. Please try \"SCHOOL\", \"HOSPITAL\", \"HOUSE\", \"AIRPORT\" or \"STADIUM\"");
+			System.out.println("Error: Terrain type not valid.");
 			return;
 		}
 		
+		else terrainType = terraintype1;
+	
 		/*
 		 * Validation for the connectors available
 		 * (MUST HAVE, MUST NOT HAVE, CAN HAVE)
 		 */
-		if(connector1 == "MUST HAVE") {
+		if(connector1.equals("MUST HAVE")) {
 			connector = connector1;
 		}
-		else if(connector1 == "MUST NOT HAVE") {
+		else if(connector1.equals("MUST NOT HAVE")) {
 			connector = connector1;
 		}
-		else if(connector1 == "CAN HAVE") {
+		else if(connector1.equals("CAN HAVE")) {
 			connector = connector1;
 		}
 		else {
@@ -51,20 +35,6 @@ public class Constraint {
 		}
 		
 		rule = r;
-		
-		/*
-		 * Validations for the rule structure.
-
-		// - if the field is "type" the measurement has to be "EXACTLY"
-		if( (r.getField() == "type") && (r.getMeasurement() != "EXACTLY") ) {
-			System.out.println("Field: " + r.getField());
-			System.out.println("Measurement: " + r.getMeasurement());
-			System.out.println("Error: Invalid rule. \"Type\" field can only be measured with \"EXACTLY\".");
-			return;
-		}
-		else {
-			r = new Rule("", "EXACTLY", 0, "type");
-		}*/
 	}
 	
 	/* Gets */
