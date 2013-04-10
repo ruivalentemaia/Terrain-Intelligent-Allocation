@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <numberTerrains>15</numberTerrains>
+    <buildingTypes>
+	    <building>
+	        <name>SCHOOL</name>
+	        <restrictions>
+	            <r1>
+	               	<type>MUST HAVE</type>
+	               	<rule>
+	               	    <nearTerrain>0</nearTerrain>
+	               	    <measurement>MORE THAN</measurement>
+	               	    <value>1.0</value>
+	               	    <field>leaning</field>
+	               	</rule>
+	            </r1>
+	            <r2>
+	                <type></type>
+	                <rule>
+	                    <nearTerrain></nearTerrain>
+	                    <measurement></measurement>
+	                    <value></value>
+	                    <field></field>
+	                </rule>
+	            </r2>
+	        </restrictions>
+	    </building>
+    </buildingTypes>
+</config>
