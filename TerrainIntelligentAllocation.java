@@ -17,6 +17,8 @@ import details.Rule;
 public class TerrainIntelligentAllocation {
 	
 	public static void main(String [ ] args) throws SAXException, IOException, ParserConfigurationException, TransformerException {
+		Map m = new Map();
+		
 		//File f = new File("src/config/terrains.xml");
 		//XML xml = new XML(f);
 		
@@ -34,9 +36,7 @@ public class TerrainIntelligentAllocation {
 		edges1.add(e2);
 		edges1.add(e3);
 		edges1.add(e4);
-		
-		Map m = new Map();
-		
+			
 		Rule r = new Rule("", "MORE THAN", 1.0, "leaning");
 		Constraint c = new Constraint("SCHOOL", "MUST HAVE", r);
 		Terrain t = new Terrain("NOT FERTILE", 1.1, 2.2, 3.3, 4.4, edges1);
