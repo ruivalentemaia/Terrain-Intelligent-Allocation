@@ -1,30 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
-    <numberTerrains>15</numberTerrains>
-    <maxArea>1000</maxArea>
-    <buildingTypes>
-	    <building>
-	        <name>SCHOOL</name>
-	        <restrictions>
-	            <restriction>
-	               	<type>MUST HAVE</type>
-	               	<rule>
-	               	    <nearTerrain>0</nearTerrain>
-	               	    <measurement>MORE THAN</measurement>
-	               	    <value>1.0</value>
-	               	    <field>leaning</field>
-	               	</rule>
-	            </restriction>
-	            <restriction>
-	                <type>MUST NOT HAVE</type>
-	                <rule>
-	                    <nearTerrain></nearTerrain>
-	                    <measurement>LESS THAN</measurement>
-	                    <value>1</value>
-	                    <field>width</field>
-	                </rule>
-	            </restriction>
-	        </restrictions>
-	    </building>
-    </buildingTypes>
+    <buildings>
+    <building>
+      <name>SCHOOL</name>
+      <restrictions>
+        <building>
+          <name>SCHOOL</name>
+          <restrictions/>
+        </building>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>MORE THAN</measurement>
+            <value>1.5</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>MORE THAN</measurement>
+            <value>1.5</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    </buildings> 
 </config>

@@ -37,13 +37,14 @@ public class TerrainIntelligentAllocation {
 		edges1.add(e3);
 		edges1.add(e4);
 			
-		Rule r = new Rule("", "MORE THAN", 1.0, "leaning");
+		Rule r = new Rule("", "MORE THAN", 1.5, "leaning");
 		Constraint c = new Constraint("SCHOOL", "MUST HAVE", r);
-		Terrain t = new Terrain("NOT FERTILE", 1.1, 2.2, 3.3, 4.4, edges1);
+		Terrain t = new Terrain("NOT FERTILE", 2.1, 2.2, 3.3, 4.4, edges1);
 		if(t.applyUserSelectedConstraint(c)) {
 			System.out.println("Yes!");
 			File f2 = new File("src/config/config.xml");
 			XML xml2 = new XML(f2);
+			xml2.addRestrictionsToTerrain(10, 110.5, c);
 			m = xml2.readConfigurationFile();
 			m.addTerrain(t);
 			m.print();

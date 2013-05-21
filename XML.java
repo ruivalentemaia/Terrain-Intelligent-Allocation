@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -101,7 +102,7 @@ public class XML {
 	/*
 	 * Adds a terrain to the terrains.xml configuration file
 	 */
-	public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAXException, IOException, TransformerException {
 		
 		if(t.validationNumber == 1) {
 			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance(); 
@@ -261,13 +262,8 @@ public class XML {
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(file);
 		
-		String numberTerrains = document.getElementsByTagName("numberTerrains").item(0).getTextContent();
-		int nT = Integer.parseInt(numberTerrains);
-		String maxArea = document.getElementsByTagName("maxArea").item(0).getTextContent();
-		double mA = Double.parseDouble(maxArea);
-		
 		//add to map attributes...
-		Map m = new Map(nT, mA);
+		Map m = new Map();
 	
 		for(int i = 0; i < document.getElementsByTagName("building").getLength();i++) {
 			String bName = document.getElementsByTagName("name").item(i).getTextContent();
@@ -286,5 +282,156 @@ public class XML {
 			}
 		}
 		return m;
+	}
+	
+	/*
+	 * Writes data to file config.xml
+	 */
+	public void addRestrictionsToTerrain(int nT, double mA, Constraint c) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance(); 
+			domFactory.setIgnoringComments(true);
+			DocumentBuilder builder = domFactory.newDocumentBuilder(); 
+			Document doc = builder.parse(file);
+			
+			List<String> buildingTypes = new ArrayList<String>();
+			int buildingExists = 0;
+				
+			NodeList nodes = doc.getElementsByTagName("building");
+			
+			/*
+			 * Structure of the "config" element
+			 * 
+			 * <config>
+			 * 	<configuration>
+			 * 	<numberTerrains>nT</numberTerrains>
+			 * 	<maxArea>mA</maxArea>
+			 * 	<buildingTypes>
+			 * 		<building>
+			 * 			<name>c.getTerrainType()</name>
+			 * 			<restrictions>
+			 * 				<restriction>
+			 * 					<type>c.getConnector()</type>
+			 * 					<rule>
+			 * 						<nearTerrain>c.getRule().getNearTerrain()</nearTerrain>
+			 * 						<measurement>c.getRule().getMeasurement</measurement>
+			 * 						<value>c.getRule.getValue()</value>
+			 * 						<field>c.getRule.getField()</field>
+			 * 					</rule>
+			 * 				</restriction>
+			 * 				<restriction>
+			 * 					<type>c.getConnector()</type>
+			 * 					<rule>
+			 * 						<nearTerrain>c.getRule().getNearTerrain()</nearTerrain>
+			 * 						<measurement>c.getRule().getMeasurement()</measurement>
+			 * 						<value>c.getRule().getValue()</value>
+			 * 						<field>c.getRule().getField()</field>
+			 * 					</rule>
+			 * 				</restriction>
+			 * 			</restrictions>
+			 * 		</building>
+			 * 	</buildingTypes>
+			 * </configuration>
+			 * </config>
+			 * 
+			 */
+			
+			Element building = doc.createElement("building");
+			
+			Text bName = doc.createTextNode(c.getTerrainType());
+			Element name = doc.createElement("name");
+			name.appendChild(bName);
+			
+			if(buildingTypes.size() == 0)
+				buildingTypes.add(bName.getTextContent());
+			
+			Element restrictions = doc.createElement("restrictions");
+			Element restriction = doc.createElement("restriction");
+			
+			Text bType = doc.createTextNode(c.getConnector());
+			Element type = doc.createElement("type");
+			type.appendChild(bType);
+			
+			Element rule = doc.createElement("rule");
+			
+			Text rNT = doc.createTextNode(c.getRule().getNearTerrain());
+			Element nearTerrain = doc.createElement("nearTerrain");
+			nearTerrain.appendChild(rNT);
+			
+			Text rMeasurement = doc.createTextNode(c.getRule().getMeasurement());
+			Element measurement = doc.createElement("measurement");
+			measurement.appendChild(rMeasurement);
+			
+			Text rValue = doc.createTextNode(Double.toString(c.getRule().getNumber()));
+			Element value = doc.createElement("value");
+			value.appendChild(rValue);
+			
+			Text rField = doc.createTextNode(c.getRule().getField());
+			Element field = doc.createElement("field");
+			field.appendChild(rField);
+			
+			rule.appendChild(nearTerrain);
+			rule.appendChild(measurement);
+			rule.appendChild(value);
+			rule.appendChild(field);
+			
+			restriction.appendChild(type);
+			restriction.appendChild(rule);
+			
+			restrictions.appendChild(restriction);
+			
+			building.appendChild(name);
+			building.appendChild(restrictions);
+			
+			for(int i = 0; i < buildingTypes.size(); i++) {
+				if(buildingTypes.get(i).contentEquals(building.getFirstChild().getTextContent())) {
+					nodes = doc.getElementsByTagName("restriction");
+					nodes.item(0).getParentNode().insertBefore(restriction, nodes.item(0));
+					buildingExists = 1;
+				}
+			}
+			if(buildingExists == 0) {
+				buildingTypes.add(building.getTextContent());
+				nodes.item(0).getParentNode().insertBefore(building, nodes.item(0));
+			}
+			else nodes.item(0).getParentNode().insertBefore(building, nodes.item(0));
+			
+			System.out.println(bName.getTextContent());
+			System.out.println("Building Exists = " + buildingExists);
+			
+			TransformerFactory tf = TransformerFactory.newInstance();
+			tf.setAttribute("indent-number", new Integer(2));
+			Transformer transformer = tf.newTransformer();
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+			StreamResult result = new StreamResult(new StringWriter());
+			DOMSource source = new DOMSource(doc);
+			transformer.transform(source, result);
+
+			String xmlOutput = result.getWriter().toString();
+			
+			//Writing to the file
+			FileOutputStream fop = null;
+	        try {
+	        	fop = new FileOutputStream(file);
+	            if (!file.exists()) {
+	            	file.createNewFile();
+	            }
+	            byte[] contentInBytes = xmlOutput.getBytes();
+	            fop.write(contentInBytes);
+	            fop.flush();
+	            fop.close();
+
+	        } catch (IOException e) {
+	        	e.printStackTrace();
+	        } finally {
+	        	try {
+	        		if (fop != null) {
+	        			fop.close();
+	                }
+	            } catch (IOException e) {
+	            	e.printStackTrace();
+	            }
+	        }	
 	}
 }
