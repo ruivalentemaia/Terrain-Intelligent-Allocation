@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
     <buildings>
-    <building>
-      <name>SCHOOL</name>
-      <restrictions>
-        <building>
-          <name>SCHOOL</name>
-          <restrictions/>
-        </building>
-        <restriction>
-          <type>MUST HAVE</type>
-          <rule>
-            <nearTerrain/>
-            <measurement>MORE THAN</measurement>
-            <value>1.5</value>
-            <field>leaning</field>
-          </rule>
-        </restriction>
-        <restriction>
-          <type>MUST HAVE</type>
-          <rule>
-            <nearTerrain/>
-            <measurement>MORE THAN</measurement>
-            <value>1.5</value>
-            <field>leaning</field>
-          </rule>
-        </restriction>
-      </restrictions>
-    </building>
+    <building></building>
     </buildings> 
 </config>

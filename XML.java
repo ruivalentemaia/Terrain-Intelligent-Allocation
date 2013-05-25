@@ -90,9 +90,8 @@ public class XML {
 		        edges.add(edge);
 		    }
 		        
-		    Terrain t = new Terrain(type, leaning, width, height, price, edges);
+		    Terrain t = new Terrain(type, leaning, width, height, price);
 		    t.print();
-		    t.getEdges().clear();
 		    counterTerrains++;
 		}
 		      
@@ -177,39 +176,6 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 			terrain.appendChild(height);
 			terrain.appendChild(price);
 			
-			Element edges = doc.createElement("edges");
-			
-			int edgesSize = t.getEdgesSize();
-			
-			for(int i = 0; i < edgesSize; i++) {
-				Element edge = doc.createElement("edge");
-				
-				Text x1t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP1().getX1()));
-				Element x1 = doc.createElement("x1");
-				x1.appendChild(x1t);
-				
-				Text y1t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP1().getY1()));
-				Element y1 = doc.createElement("y1");
-				y1.appendChild(y1t);
-				
-				Text x2t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP2().getX1()));
-				Element x2 = doc.createElement("x2");
-				x2.appendChild(x2t);
-				
-				Text y2t = doc.createTextNode(Double.toString(t.getEdges().get(i).getP2().getY1()));
-				Element y2 = doc.createElement("y2");
-				y2.appendChild(y2t);
-				
-				edge.appendChild(x1);
-				edge.appendChild(y1);
-				edge.appendChild(x2);
-				edge.appendChild(y2);
-				
-				edges.appendChild(edge);
-			}
-				
-			terrain.appendChild(edges);
-			
 			nodes.item(0).getParentNode().insertBefore(terrain, nodes.item(0));
 			
 			TransformerFactory tf = TransformerFactory.newInstance();
@@ -287,14 +253,11 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 	/*
 	 * Writes data to file config.xml
 	 */
-	public void addRestrictionsToTerrain(int nT, double mA, Constraint c) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+	public void addRestrictionsToTerrain(int nT, Constraint c) throws ParserConfigurationException, SAXException, IOException, TransformerException {
 			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance(); 
 			domFactory.setIgnoringComments(true);
 			DocumentBuilder builder = domFactory.newDocumentBuilder(); 
 			Document doc = builder.parse(file);
-			
-			List<String> buildingTypes = new ArrayList<String>();
-			int buildingExists = 0;
 				
 			NodeList nodes = doc.getElementsByTagName("building");
 			
@@ -341,9 +304,6 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 			Element name = doc.createElement("name");
 			name.appendChild(bName);
 			
-			if(buildingTypes.size() == 0)
-				buildingTypes.add(bName.getTextContent());
-			
 			Element restrictions = doc.createElement("restrictions");
 			Element restriction = doc.createElement("restriction");
 			
@@ -382,21 +342,7 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 			building.appendChild(name);
 			building.appendChild(restrictions);
 			
-			for(int i = 0; i < buildingTypes.size(); i++) {
-				if(buildingTypes.get(i).contentEquals(building.getFirstChild().getTextContent())) {
-					nodes = doc.getElementsByTagName("restriction");
-					nodes.item(0).getParentNode().insertBefore(restriction, nodes.item(0));
-					buildingExists = 1;
-				}
-			}
-			if(buildingExists == 0) {
-				buildingTypes.add(building.getTextContent());
-				nodes.item(0).getParentNode().insertBefore(building, nodes.item(0));
-			}
-			else nodes.item(0).getParentNode().insertBefore(building, nodes.item(0));
-			
-			System.out.println(bName.getTextContent());
-			System.out.println("Building Exists = " + buildingExists);
+			nodes.item(0).getParentNode().insertBefore(building, nodes.item(0));
 			
 			TransformerFactory tf = TransformerFactory.newInstance();
 			tf.setAttribute("indent-number", new Integer(2));

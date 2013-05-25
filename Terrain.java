@@ -12,13 +12,12 @@ public class Terrain {
 	private double height;
 	private double price;
 	//arraylist of edges
-	private static List<Edge> edges = new ArrayList<Edge>();
 	private boolean penalty;
 	
 	//number that says if a terrain is valid or not
 	public int validationNumber;
 	
-	public Terrain(String typeT, double leaningT, double widthT, double heightT, double priceT, List<Edge> edgesT) {
+	public Terrain(String typeT, double leaningT, double widthT, double heightT, double priceT) {
 		
 		penalty = false;
 		validationNumber = 0;
@@ -74,15 +73,6 @@ public class Terrain {
 			return;
 		}
 		
-		if(edgesT.size() > 2) {
-			edges = edgesT;
-		}
-		else{
-			System.out.println("Size of the edges list: " + edgesT.size());
-			System.out.println("Error: The number of edges of the terrain has to be at least 3.");
-			return;
-		}
-		
 		validationNumber = 1;
 		
 	}
@@ -109,14 +99,6 @@ public class Terrain {
 		return price;
 	}
 	
-	public List<Edge> getEdges() {
-		return edges;
-	}
-	
-	public int getEdgesSize() {
-		return edges.size();
-	}
-	
 	public boolean getPenalty() {
 		return penalty;
 	}
@@ -131,7 +113,7 @@ public class Terrain {
 		leaning = leaningS;
 	}
 	
-	public void getWidth(double widthS) {
+	public void setWidth(double widthS) {
 		width = widthS;
 	}
 	
@@ -141,10 +123,6 @@ public class Terrain {
 	
 	public void setPrice(double priceS) {
 		price = priceS;
-	}
-	
-	public void setEdges(List<Edge> edgesS) {
-		edges = edgesS;
 	}
 	
 	public void setPenalty(boolean pen) {
@@ -160,11 +138,6 @@ public class Terrain {
 			System.out.println("Area: " + this.getWidth() * this.getHeight());
 			System.out.println("Price: " + this.getPrice());
 			System.out.println("Price per sq. meter: " + this.getPrice()/(this.getWidth() + this.getHeight()));
-			for(int i = 0; i < edges.size(); i++) {
-				System.out.println("Edge " + i);
-				System.out.println("P1: " + edges.get(i).getP1().getX1() + "," + edges.get(i).getP1().getY1());
-				System.out.println("P2: " + edges.get(i).getP2().getX1() + "," + edges.get(i).getP2().getY1());
-			}
 			System.out.print("\n");
 		}
 		else {

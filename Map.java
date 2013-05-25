@@ -5,20 +5,17 @@ import details.Constraint;
 
 public class Map {
 	int numberTerrains;
-	double maxArea;
 	List<Terrain> terrains = new ArrayList<Terrain>();
 	List<Constraint> constraints = new ArrayList<Constraint>();
 	
-	public Map(int nT, double mA) {
+	public Map(int nT) {
 		numberTerrains = nT;
-		maxArea = mA;
 		terrains.clear();
 		constraints.clear();
 	}
 	
 	public Map() {
 		numberTerrains = 0;
-		maxArea = 0.0;
 		terrains.clear();
 		constraints.clear();
 	}
@@ -26,10 +23,6 @@ public class Map {
 	//Gets e sets...
 	public int getNumberTerrains() {
 		return numberTerrains;
-	}
-	
-	public double getMaxArea() {
-		return maxArea;
 	}
 	
 	public List<Terrain> getListTerrains() {
@@ -44,10 +37,6 @@ public class Map {
 		numberTerrains = nT;
 	}
 	
-	public void setMaxArea(double mA){
-		maxArea = mA;
-	}
-	
 	public void setTerrainsList(List<Terrain> l){
 		terrains = l;
 	}
@@ -59,7 +48,6 @@ public class Map {
 	//Print information
 	public void print() {
 		System.out.println("Number of Terrains: " + numberTerrains);
-		System.out.println("Max Area: " + maxArea);
 		for(int i = 0; i < terrains.size(); i++) {
 			terrains.get(i).print();
 		}
@@ -71,6 +59,7 @@ public class Map {
 			System.out.println("Number: " + constraints.get(i).getRule().getNumber());
 			System.out.println("Field: " + constraints.get(i).getRule().getField());
 		}
+		System.out.println();
 	}
 	
 	//Add, update, remove constraint to 'constraints'
