@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <terrains>
   <terrain>
-    <type>FERTILE</type>
-    <leaning>1.0</leaning>
-    <width>1.0</width>
-    <height>1.0</height>
-    <price>1.0</price>
-  </terrain>
-  <terrain>
     </terrain>
 </terrains>

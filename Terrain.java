@@ -6,6 +6,7 @@ import details.Edge;
 import details.Rule;
 
 public class Terrain {
+	public int id;
 	private String type;
 	private double leaning;
 	private double width;

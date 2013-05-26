@@ -26,6 +26,10 @@ public class TerrainIntelligentAllocation {
 		File constraints = new File("src/config/config.xml");
 		XML xmlConstraints = new XML(constraints);
 		
+		//Needed for the A* algorithm
+		List<String> solutions = new ArrayList<String>();
+		List<Node> tree = new ArrayList<Node>();
+		
 		//User inserts the size of the map
 		int sizeOfTerrain,fertile;
 		String fertileString = "";
@@ -57,6 +61,7 @@ public class TerrainIntelligentAllocation {
 			else if(fertile == 1) fertileString = "FERTILE";
 			else fertileString = "";
 			Terrain t = new Terrain(fertileString, leaning, width, height, price);
+			t.id = i;
 			if(t.validationNumber == 1)
 				m.addTerrain(t);
 			
@@ -185,5 +190,73 @@ public class TerrainIntelligentAllocation {
 				xmlConstraints.addRestrictionsToTerrain(m.getNumberTerrains(), m.getListConstraints().get(d));
 			}
 		}
+		
+		//A* algorithm
+		AStar aStar = new AStar(solutions, existentBuildings, m.getListTerrains());
+		Terrain current, left, right;
+		Node initialNode;
+		aStar.print();
+		double fn = 0.0;
+		double totalPrice = 0.0;
+		
+		// if there's only one slot to be allocated
+		if((m.getListTerrains().size() > 0) && (m.getListTerrains().size() < 2)) {
+			current = m.getListTerrains().get(0);
+			
+			//verify if the only terrain in the map fills the restrictions
+			if(existentBuildings.size() >= 1) {
+				System.out.println("\nOnly one building can be allocated, because there's only one terrain available.");
+				for(int i = 0; i < m.getListConstraints().size(); i++) {
+					Constraint c = m.getListConstraints().get(i);
+					if(current.applyUserSelectedConstraint(c)) { 
+						solutions.add(current.id + "-" + m.getListConstraints().get(i).getTerrainType());
+						System.out.println("Allocation complete. Allocation (Terrain-Building):");
+						System.out.println(solutions.get(0));
+						System.out.println("Total Price: " + current.getPrice());
+						break;
+					}
+				}
+				if(solutions.size() == 0) 
+					System.out.println("The constraints you defined didn't allow any allocation.");
+				solutions.clear();
+			}
+		}
+		
+		//if there are 2 slots to be allocated
+		else if(m.getListTerrains().size() == 2) {
+			current = m.getListTerrains().get(0);
+			left = m.getListTerrains().get(1);
+			for(int i = 0; i < m.getListConstraints().size(); i++) {
+				Constraint c = m.getListConstraints().get(i);
+				if(current.applyUserSelectedConstraint(c)) { 
+					solutions.add(current.id + "-" + m.getListConstraints().get(i).getTerrainType());
+					totalPrice += current.getPrice();
+				}
+				else if(left.applyUserSelectedConstraint(c)) {
+					solutions.add(left.id + "-" + m.getListConstraints().get(i).getTerrainType());
+					totalPrice += left.getPrice();
+				}
+			}
+			System.out.println("Allocation complete. Allocation (Terrain-Building):");
+			for(int a = 0; a < solutions.size(); a++) {
+				System.out.println(solutions.get(a));
+			}
+			System.out.println("Total Price: " + totalPrice);
+		}
+		
+		if(m.getListTerrains().size() > 2) {
+			current = m.getListTerrains().get(0);
+			left = m.getListTerrains().get(1);
+			right = m.getListTerrains().get(2);
+			initialNode = new Node(current, left, right, fn);
+			tree.add(initialNode);
+			while(existentBuildings.size() > 0) {
+				//for the initial node
+				fn = aStar.updateHeuristicValue(existentBuildings, m.getListTerrains());
+		
+			}
+			
+		}
 	}
 }
+

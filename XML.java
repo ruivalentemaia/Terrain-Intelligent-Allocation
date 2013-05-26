@@ -114,41 +114,20 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 			/*
 			 * Structure of the "terrain" element
 			 * <terrain>
+			 * 	<id>t.id</id>
 			 * 	<type>t.getType()</type>
 			 * 	<leaning>t.getLeaning()</leaning>
 			 * 	<width>t.getWidth()</width>
 			 * 	<height>t.getHeight()</height>
 			 *	<price>t.getPrice()</price>
-			 *	<edges>
-			 *		<edge>
-			 *			<x1>t.getEdges().get(i).getP1().getX1()</x1>
-			 *			<y1>t.getEdges().get(i).getP1().getY1()</y1>
-			 *			<x2>t.getEdges().get(i).getP2().getX1()</x2>
-			 *			<y2>t.getEdges().get(i).getP2().getY1()</y2>
-			 *		</edge>
-			 *		<edge>
-			 *			<x1>t.getEdges().get(i+1).getP1().getX1()</x1>
-			 *			<y1>t.getEdges().get(i+1).getP1().getY1()</y1>
-			 *			<x2>t.getEdges().get(i+1).getP2().getX1()</x2>
-			 *			<y2>t.getEdges().get(i+1).getP2().getY1()</y2>
-			 *		</edge>
-			 *		<edge>
-			 *			<x1>t.getEdges().get(i+2).getP1().getX1()</x1>
-			 *			<y1>t.getEdges().get(i+2).getP1().getY1()</y1>
-			 *			<x2>t.getEdges().get(i+2).getP2().getX1()</x2>
-			 *			<y2>t.getEdges().get(i+2).getP2().getY1()</y2>
-			 *		</edge>
-			 *		<edge>
-			 *			<x1>t.getEdges().get(i+3).getP1().getX1()</x1>
-			 *			<y1>t.getEdges().get(i+3).getP1().getY1()</y1>
-			 *			<x2>t.getEdges().get(i+3).getP2().getX1()</x2>
-			 *			<y2>t.getEdges().get(i+3).getP2().getY1()</y2>
-			 *		</edge>
-			 *	</edges>
 			 * </terrain>
 			 */
 			
 			Element terrain = doc.createElement("terrain");
+			
+			Text id = doc.createTextNode(Integer.toString(t.id));
+			Element idElement = doc.createElement("id");
+			idElement.appendChild(id);
 			
 			Text ty = doc.createTextNode(t.getType()); 
 			Element p = doc.createElement("type"); 
@@ -169,7 +148,8 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 			Text pri = doc.createTextNode(Double.toString(t.getPrice()));
 			Element price = doc.createElement("price");
 			price.appendChild(pri);
-
+			
+			terrain.appendChild(idElement);
 			terrain.appendChild(p);
 			terrain.appendChild(leaning);
 			terrain.appendChild(width);
