@@ -2,6 +2,62 @@
 <config>
     <buildings>
     <building>
+      <name>Fc</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>MORE THAN</measurement>
+            <value>1.4</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Sc</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>LESS THAN</measurement>
+            <value>1.3</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Sc</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>LESS THAN</measurement>
+            <value>1.3</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>LESS THAN</measurement>
+            <value>1.0</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
       <name>Rc</name>
       <restrictions>
         <restriction>

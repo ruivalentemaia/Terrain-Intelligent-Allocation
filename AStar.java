@@ -40,7 +40,6 @@ public class AStar {
 			hn += pricesOrdered.get(a);
 		}
 		
-		System.out.println("Value of heuristic: " + hn);
 		return hn;
 	}
 	
