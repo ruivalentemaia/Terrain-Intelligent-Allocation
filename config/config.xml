@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
     <buildings>
+    <building>
+      <name>Rc</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>MORE OR THE SAME AS</measurement>
+            <value>1.1</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Sc</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>MORE THAN</measurement>
+            <value>3.5</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Sc</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <nearTerrain/>
+            <measurement>MORE THAN</measurement>
+            <value>3.5</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
     <building/>
     </buildings> 
 </config>

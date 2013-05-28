@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -28,7 +29,6 @@ public class TerrainIntelligentAllocation {
 		
 		//Needed for the A* algorithm
 		List<String> solutions = new ArrayList<String>();
-		List<Node> tree = new ArrayList<Node>();
 		
 		//User inserts the size of the map
 		int sizeOfTerrain,fertile;
@@ -191,17 +191,22 @@ public class TerrainIntelligentAllocation {
 			}
 		}
 		
-		//A* algorithm
+		/*
+		 * A* algorithm
+		 */
 		AStar aStar = new AStar(solutions, existentBuildings, m.getListTerrains());
-		Terrain current, left, right;
-		Node initialNode;
+		List<String> landuses = new ArrayList<String>();
+		landuses = aStar.getLandusesList();
+		List<Terrain> unassignedTerrains = new ArrayList<Terrain>();
+		unassignedTerrains = aStar.getUnassignedTerrainsList();
+		Terrain current, left;
 		aStar.print();
 		double fn = 0.0;
 		double totalPrice = 0.0;
 		
 		// if there's only one slot to be allocated
-		if((m.getListTerrains().size() > 0) && (m.getListTerrains().size() < 2)) {
-			current = m.getListTerrains().get(0);
+		if((unassignedTerrains.size() > 0) && (unassignedTerrains.size() < 2)) {
+			current = unassignedTerrains.get(0);
 			
 			//verify if the only terrain in the map fills the restrictions
 			if(existentBuildings.size() >= 1) {
@@ -223,9 +228,9 @@ public class TerrainIntelligentAllocation {
 		}
 		
 		//if there are 2 slots to be allocated
-		else if(m.getListTerrains().size() == 2) {
-			current = m.getListTerrains().get(0);
-			left = m.getListTerrains().get(1);
+		else if(unassignedTerrains.size() == 2) {
+			current = unassignedTerrains.get(0);
+			left = unassignedTerrains.get(1);
 			for(int i = 0; i < m.getListConstraints().size(); i++) {
 				Constraint c = m.getListConstraints().get(i);
 				if(current.applyUserSelectedConstraint(c)) { 
@@ -244,18 +249,70 @@ public class TerrainIntelligentAllocation {
 			System.out.println("Total Price: " + totalPrice);
 		}
 		
-		if(m.getListTerrains().size() > 2) {
-			current = m.getListTerrains().get(0);
-			left = m.getListTerrains().get(1);
-			right = m.getListTerrains().get(2);
-			initialNode = new Node(current, left, right, fn);
-			tree.add(initialNode);
-			while(existentBuildings.size() > 0) {
-				//for the initial node
-				fn = aStar.updateHeuristicValue(existentBuildings, m.getListTerrains());
-		
+		else if(unassignedTerrains.size() > 2) {
+			double accumulatedCost = 0.0;
+			int i = 0,inc = 0;
+			double moveLeftCost = 0.0;
+			double moveRightCost = 0.0;
+			List<Terrain> visited = new ArrayList<Terrain>();
+			
+			//orders nodes by crescent order of price
+			List<Double> pricesOrdered = new ArrayList<Double>();
+			List<Terrain> orderedUnassignedTerrains = new ArrayList<Terrain>();
+			for(int o = 0; o < unassignedTerrains.size(); o++) {
+				pricesOrdered.add(unassignedTerrains.get(o).getPrice());
 			}
 			
+			Collections.sort(pricesOrdered);
+			
+			for(int j = 0; j < pricesOrdered.size(); j++) {
+				for(int u = 0; u < unassignedTerrains.size(); u++) {
+					if(pricesOrdered.get(j) == unassignedTerrains.get(u).getPrice()) {
+						orderedUnassignedTerrains.add(unassignedTerrains.get(u));
+					}
+				}
+			}
+			
+			//calculates the fn = gn + hn for the first terrain and adds to the visited terrains
+			fn = accumulatedCost + aStar.updateHeuristicValue(landuses, orderedUnassignedTerrains);
+			visited.add(orderedUnassignedTerrains.get(0));
+			
+			while(landuses.size() > 0) {
+				current = visited.get(inc);
+				if(landuses.size() > 0) {
+					//check if terrain goes with the constraints defined
+					for(int b = 0; b < m.getListConstraints().size(); b++) {
+						Constraint c = m.getListConstraints().get(b);
+						if(current.applyUserSelectedConstraint(c)) { 
+							solutions.add(current.id + "-" + m.getListConstraints().get(b).getTerrainType());
+							totalPrice += current.getPrice();
+							landuses.remove(m.getListConstraints().get(b).getTerrainType());
+							m.getListConstraints().remove(b);
+							orderedUnassignedTerrains.remove(b);
+						}
+					}
+				}
+				inc++;
+				for(; i < orderedUnassignedTerrains.size(); i++) {
+					visited.add(orderedUnassignedTerrains.get(i));
+					fn = totalPrice + aStar.updateHeuristicValue(landuses, orderedUnassignedTerrains);
+					for(int aux = 0; aux < visited.size(); aux++) {
+						if((orderedUnassignedTerrains.get(i).equals(visited.get(aux))) && (fn >= orderedUnassignedTerrains.get(i).getPrice())) {
+							// ....
+							System.out.println("The terrain with id "+orderedUnassignedTerrains.get(i).id + " is not a good one.");
+						}
+						if( !(orderedUnassignedTerrains.contains(orderedUnassignedTerrains.get(i))) || (fn < orderedUnassignedTerrains.get(i).getPrice()) ) {
+							current = orderedUnassignedTerrains.get(i);
+							accumulatedCost = fn;
+							fn = accumulatedCost + aStar.updateHeuristicValue(landuses, orderedUnassignedTerrains);
+							if(!(orderedUnassignedTerrains.contains(orderedUnassignedTerrains.get(i)))) 
+								visited.add(orderedUnassignedTerrains.get(i));
+						}
+					}
+				}
+			}
+			System.out.println("Solution: " + solutions);
+			System.out.println("Total price: " + totalPrice);
 		}
 	}
 }

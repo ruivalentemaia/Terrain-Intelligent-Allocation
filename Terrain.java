@@ -289,7 +289,7 @@ public class Terrain {
 						r.setNumber(1);
 						return true;
 					}
-					else if(this.getType() == "NOT FERTILE") {
+					else if(this.getType().equals("NOT FERTILE")) {
 						r.setNumber(0);
 						return true;
 					}

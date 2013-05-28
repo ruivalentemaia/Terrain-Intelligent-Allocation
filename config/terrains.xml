@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <terrains>
   <terrain>
+    <id>3</id>
+    <type>FERTILE</type>
+    <leaning>3.0</leaning>
+    <width>1.0</width>
+    <height>1.0</height>
+    <price>1.5</price>
+  </terrain>
+  <terrain>
+    <id>2</id>
+    <type>FERTILE</type>
+    <leaning>5.0</leaning>
+    <width>1.0</width>
+    <height>1.0</height>
+    <price>2.0</price>
+  </terrain>
+  <terrain>
+    <id>1</id>
+    <type>FERTILE</type>
+    <leaning>1.0</leaning>
+    <width>1.0</width>
+    <height>1.0</height>
+    <price>1.0</price>
+  </terrain>
+  <terrain>
     </terrain>
 </terrains>

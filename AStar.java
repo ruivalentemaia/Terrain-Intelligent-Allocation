@@ -14,8 +14,20 @@ public class AStar {
 		unassignedTerrains = uT;
 	}
 	
+	public List<String> getSolutionsList() {
+		return solutions;
+	}
+	
+	public List<String> getLandusesList() {
+		return landuses;
+	}
+	
+	public List<Terrain> getUnassignedTerrainsList() {
+		return unassignedTerrains;
+	}
+	
 	public  double updateHeuristicValue(List<String> l, List<Terrain> uT) {
-		double hn = 0.0, minCost;
+		double hn = 0.0;
 		List<Double> pricesOrdered = new ArrayList<Double>();
 		
 		for(int i = 0; i < uT.size(); i++) {
