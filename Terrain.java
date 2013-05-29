@@ -133,6 +133,7 @@ public class Terrain {
 	/* Print Terrain Information */
 	public void print() {
 		if(validationNumber == 1) {
+			System.out.println("ID: " + this.id);
 			System.out.println("Type: " + this.getType());
 			System.out.println("Leaning: " + this.getLeaning());
 			System.out.println("Width: " + this.getWidth() + " " + "Height: " + this.getHeight());

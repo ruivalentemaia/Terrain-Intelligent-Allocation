@@ -30,8 +30,12 @@ public class XML {
 	
 	private File file;
 	
-	public XML(File f) {
-		file = f;
+	public XML(File f) throws IOException {
+		if(!f.exists()) {
+			f.createNewFile();
+			file = f;
+		}
+		else file = f;
 	}
 	
 	public File getFile() {
@@ -47,14 +51,17 @@ public class XML {
 	 * writes its' information and the number of terrains that exist
 	 * in the file.
 	 */
-	public void readFile(List<details.Edge> edges) throws ParserConfigurationException, SAXException, IOException {
+	public List<Terrain> readFile() throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(file);
 		int counterTerrains = 0;
+		List<Terrain> terrains = new ArrayList<Terrain>();
 		      
-		for(int a = 0; a < document.getElementsByTagName("terrain").getLength(); a++) {
+		for(int a = 0; a < document.getElementsByTagName("terrain").getLength()-1; a++) {
 		    
+			int id = Integer.parseInt(document.getElementsByTagName("id").item(a).getTextContent());
+			
 			String type = document.getElementsByTagName("type").item(a).getTextContent();
 		        
 			String leaningx = document.getElementsByTagName("leaning").item(a).getTextContent();
@@ -68,34 +75,16 @@ public class XML {
 		        
 		    String pricex = document.getElementsByTagName("price").item(a).getTextContent();
 		    double price = Double.parseDouble(pricex);
-		        
-		    for(int i = 0; i < 4; i++) {
-		    	String x1x = document.getElementsByTagName("x1").item((counterTerrains*4)+i).getTextContent();
-		        double x1 = Double.parseDouble(x1x);
-		          
-		        String y1x = document.getElementsByTagName("y1").item((counterTerrains*4)+i).getTextContent();
-		        double y1 = Double.parseDouble(y1x);
-		       
-		        details.Point P1 = new Point(x1,y1);
-		         
-		        String x2x = document.getElementsByTagName("x2").item((counterTerrains*4)+i).getTextContent();
-		        double x2 = Double.parseDouble(x2x);
-		         
-		        String y2x = document.getElementsByTagName("y2").item((counterTerrains*4)+i).getTextContent();
-		        double y2 = Double.parseDouble(y2x);
-		         
-		        details.Point P2 = new Point(x2, y2);
-		      
-		        details.Edge edge = new details.Edge(P1,P2);
-		        edges.add(edge);
-		    }
-		        
+		            
 		    Terrain t = new Terrain(type, leaning, width, height, price);
+		    t.id = id;
 		    t.print();
 		    counterTerrains++;
+		    terrains.add(t);
 		}
 		      
 		System.out.println("Number of terrains: " + counterTerrains);
+		return terrains;
 	}
 	
 	/*
@@ -203,31 +192,32 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 	/*
 	 * Reads data from config.xml and creates the Map object
 	 */
-	public Map readConfigurationFile() throws ParserConfigurationException, SAXException, IOException {
+	public List<Constraint> readConfigurationFile() throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(file);
 		
 		//add to map attributes...
-		Map m = new Map();
+		List<Constraint> constraints = new ArrayList<Constraint>();
 	
-		for(int i = 0; i < document.getElementsByTagName("building").getLength();i++) {
+		for(int i = 0; i < document.getElementsByTagName("building").getLength()-1;i++) {
 			String bName = document.getElementsByTagName("name").item(i).getTextContent();
 			for(int a = 0; a < document.getElementsByTagName("restriction").getLength(); a++){
 				String rType = document.getElementsByTagName("type").item(a).getTextContent();
-				String nTerrain = document.getElementsByTagName("nearTerrain").item(a).getTextContent();
 				String measurement = document.getElementsByTagName("measurement").item(a).getTextContent();
 				String val = document.getElementsByTagName("value").item(a).getTextContent();
 				double v = Double.parseDouble(val);
 				String field = document.getElementsByTagName("field").item(a).getTextContent();
 				
-				Rule r = new Rule(nTerrain, measurement, v, field);
+				Rule r = new Rule(measurement, v, field);
 				Constraint c = new Constraint(bName, rType, r);
-				//add to map list of constraints...
-				m.addConstraint(c);
+				
+				constraints.add(c);
+				break;
 			}
+			constraints.get(i).print();
 		}
-		return m;
+		return constraints;
 	}
 	
 	/*
@@ -293,10 +283,6 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 			
 			Element rule = doc.createElement("rule");
 			
-			Text rNT = doc.createTextNode(c.getRule().getNearTerrain());
-			Element nearTerrain = doc.createElement("nearTerrain");
-			nearTerrain.appendChild(rNT);
-			
 			Text rMeasurement = doc.createTextNode(c.getRule().getMeasurement());
 			Element measurement = doc.createElement("measurement");
 			measurement.appendChild(rMeasurement);
@@ -309,7 +295,6 @@ public void addTerrainToFile(Terrain t) throws ParserConfigurationException, SAX
 			Element field = doc.createElement("field");
 			field.appendChild(rField);
 			
-			rule.appendChild(nearTerrain);
 			rule.appendChild(measurement);
 			rule.appendChild(value);
 			rule.appendChild(field);

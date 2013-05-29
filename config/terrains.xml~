@@ -81,5 +81,29 @@
     <price>8.0</price>
   </terrain>
   <terrain>
+    <id>3</id>
+    <type>FERTILE</type>
+    <leaning>1.9</leaning>
+    <width>6.0</width>
+    <height>7.0</height>
+    <price>8.0</price>
+  </terrain>
+  <terrain>
+    <id>2</id>
+    <type>FERTILE</type>
+    <leaning>1.8</leaning>
+    <width>4.0</width>
+    <height>5.0</height>
+    <price>6.0</price>
+  </terrain>
+  <terrain>
+    <id>1</id>
+    <type>FERTILE</type>
+    <leaning>1.1</leaning>
+    <width>4.0</width>
+    <height>5.0</height>
+    <price>2.0</price>
+  </terrain>
+  <terrain>
   </terrain>
 </terrains>

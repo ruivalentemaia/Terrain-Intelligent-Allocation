@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+    <buildings>
+    <building>
+      <name>Stadium</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>LESS THAN</measurement>
+            <value>7.0</value>
+            <field>width</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Office</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>12.0</value>
+            <field>height</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>1.0</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Office</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>12.0</value>
+            <field>height</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>1.0</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>1.0</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Stadium</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>LESS THAN</measurement>
+            <value>7.0</value>
+            <field>width</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Office</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>12.0</value>
+            <field>height</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>1.0</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>Office</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>12.0</value>
+            <field>height</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>1.0</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>1.0</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>LESS THAN</measurement>
+            <value>1.5</value>
+            <field>leaning</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+	</building>
+    </buildings> 
+</config>

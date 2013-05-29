@@ -54,7 +54,6 @@ public class Map {
 		for(int i = 0; i < constraints.size(); i++) {
 			System.out.println("Terrain type: " + constraints.get(i).getTerrainType());
 			System.out.println("Connector: " + constraints.get(i).getConnector());
-			System.out.println("Near Terrain: " + constraints.get(i).getRule().getNearTerrain());
 			System.out.println("Measurement: " + constraints.get(i).getRule().getMeasurement());
 			System.out.println("Number: " + constraints.get(i).getRule().getNumber());
 			System.out.println("Field: " + constraints.get(i).getRule().getField());

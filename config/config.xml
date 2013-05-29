@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <config>
     <buildings>
-    <building>
-      <name>Fc</name>
+    	<building>
+      <name>Office</name>
       <restrictions>
         <restriction>
           <type>MUST HAVE</type>
           <rule>
-            <nearTerrain/>
             <measurement>MORE THAN</measurement>
-            <value>1.4</value>
-            <field>leaning</field>
+            <value>12.0</value>
+            <field>height</field>
           </rule>
         </restriction>
       </restrictions>
     </building>
     <building>
-      <name>Sc</name>
+      <name>School</name>
       <restrictions>
         <restriction>
           <type>MUST HAVE</type>
           <rule>
-            <nearTerrain/>
-            <measurement>LESS THAN</measurement>
-            <value>1.3</value>
-            <field>leaning</field>
-          </rule>
-        </restriction>
-      </restrictions>
-    </building>
-    <building>
-      <name>Sc</name>
-      <restrictions>
-        <restriction>
-          <type>MUST HAVE</type>
-          <rule>
-            <nearTerrain/>
-            <measurement>LESS THAN</measurement>
-            <value>1.3</value>
+            <measurement>MORE THAN</measurement>
+            <value>1.0</value>
             <field>leaning</field>
           </rule>
         </restriction>
@@ -49,8 +33,7 @@
         <restriction>
           <type>MUST HAVE</type>
           <rule>
-            <nearTerrain/>
-            <measurement>LESS THAN</measurement>
+            <measurement>MORE THAN</measurement>
             <value>1.0</value>
             <field>leaning</field>
           </rule>
@@ -58,47 +41,45 @@
       </restrictions>
     </building>
     <building>
-      <name>Rc</name>
+      <name>Office</name>
       <restrictions>
         <restriction>
           <type>MUST HAVE</type>
           <rule>
-            <nearTerrain/>
-            <measurement>MORE OR THE SAME AS</measurement>
-            <value>1.1</value>
+            <measurement>MORE THAN</measurement>
+            <value>12.0</value>
+            <field>height</field>
+          </rule>
+        </restriction>
+      </restrictions>
+    </building>
+    <building>
+      <name>School</name>
+      <restrictions>
+        <restriction>
+          <type>MUST HAVE</type>
+          <rule>
+            <measurement>MORE THAN</measurement>
+            <value>1.0</value>
             <field>leaning</field>
           </rule>
         </restriction>
       </restrictions>
     </building>
     <building>
-      <name>Sc</name>
+      <name>School</name>
       <restrictions>
         <restriction>
           <type>MUST HAVE</type>
           <rule>
-            <nearTerrain/>
             <measurement>MORE THAN</measurement>
-            <value>3.5</value>
+            <value>1.0</value>
             <field>leaning</field>
           </rule>
         </restriction>
       </restrictions>
     </building>
     <building>
-      <name>Sc</name>
-      <restrictions>
-        <restriction>
-          <type>MUST HAVE</type>
-          <rule>
-            <nearTerrain/>
-            <measurement>MORE THAN</measurement>
-            <value>3.5</value>
-            <field>leaning</field>
-          </rule>
-        </restriction>
-      </restrictions>
-    </building>
-    <building/>
+	</building>
     </buildings> 
 </config>

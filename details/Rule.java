@@ -1,22 +1,12 @@
 package details;
 
 public class Rule {
-	String nearTerrain;
 	String measurement;
 	double number;
 	String field;
 	
-	public Rule(String nT, String m, double n, String f) {
-		/*
-		 * Rule of the kind "Lake nearby", not mandatory
-		 */
-		if(nT == "LAKE") {
-			nearTerrain = nT;
-		}
-		else {
-			nearTerrain = "";
-		}
-		
+	public Rule(String m, double n, String f) {
+	
 		/*
 		 * Rule of the kind "Lake MORE THAN 2 distance"
 		 * or
@@ -82,9 +72,6 @@ public class Rule {
 	}
 	
 	/* Gets */
-	public String getNearTerrain() {
-		return nearTerrain;
-	}
 	
 	public String getMeasurement() {
 		return measurement;
@@ -99,9 +86,6 @@ public class Rule {
 	}
 	
 	/* Sets */
-	public void setNearTerrain(String n) {
-		nearTerrain = n;
-	}
 	
 	public void setMeasurement(String m) {
 		measurement = m;

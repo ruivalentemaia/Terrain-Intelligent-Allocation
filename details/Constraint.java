@@ -62,4 +62,11 @@ public class Constraint {
 	public void setRule(Rule r) {
 		rule = r;
 	}
+	
+	public void print() {
+		System.out.println("Terrain Type: " + this.terrainType);
+		System.out.println("Connector: " + this.connector);
+		System.out.println("Rule: " + this.rule.getMeasurement() + " " + this.rule.getNumber() + " " + this.rule.getField());
+		System.out.println();
+	}
 }
